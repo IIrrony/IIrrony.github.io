@@ -16,6 +16,10 @@ a {
     text-decoration: none;
 }
 
+input {
+    outline-style: none;
+}
+
 .clearfix:after,
 .clearfix:before {
     content: "";
@@ -145,7 +149,7 @@ body {
     float: right;
     width: 230px;
     height: 300px;
-    /* 浮动的盒子不会有外边距合并的问题 */
+    /* 娴姩鐨勭洅瀛愪笉浼氭湁澶栬竟璺濆悎骞剁殑闂 */
     margin-top: 50px;
     background-color: #fff;
 }

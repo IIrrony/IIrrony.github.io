@@ -1,93 +1,56 @@
-window.addEventListener('load', function () {
-    var arrow_l = document.querySelector('.arrow-l');
-    var arrow_r = document.querySelector('.arrow-r');
-    var focus = document.querySelector('.focus');
-    var focusWidth = focus.offsetWidth;
-    focus.addEventListener('mouseenter', function () {
-        arrow_l.style.display = 'block';
-        arrow_r.style.display = 'block';
-        clearInterval(timer);
-        timer = null;
-    })
-    focus.addEventListener('mouseleave', function () {
-        arrow_l.style.display = 'none';
-        arrow_r.style.display = 'none';
-        timer = setInterval(function () {
-            arrow_r.click();
-        }, 2000);
-    })
-    var ul = focus.querySelector('ul');
-    var ol = document.querySelector('.circle');
-    for (var i = 0; i < ul.children.length; i++){
-        var li = document.createElement('li');
-        li.setAttribute('index', i);
-        ol.appendChild(li);
-        li.addEventListener('click', function () {
-            for (var i = 0; i < ol.children.length; i++){
-                ol.children[i].className = '';
-            }
-            this.className = 'current';
-            var index = this.getAttribute('index');
-            // bug解决
-            num = index;
-            circle = index;
-            animate(ul,  - index * focusWidth);
-        })
-    }
-    ol.children[0].className = 'current';
-    // 克隆,在生成小圆圈后面克隆的， 所以只会有四个小圆圈
-    var first = ul.children[0].cloneNode(true);
-    ul.appendChild(first);
-    var num = 0;
-    var circle = 0;
-    var flag = true;
-    arrow_r.addEventListener('click', function () {
-        if (flag) {
-            flag = false;
-            if (num === ul.children.length - 1) {
-                ul.style.left = 0;
-                num = 0;
-            }
-            num++;
-            animate(ul, -num * focusWidth, function () {
-                flag = true;
-            });
-            circle++;
-            if (circle == ol.children.length) {
-                circle = 0;
-            }
-            circlechange();
-        }
-        
-    })
-    arrow_l.addEventListener('click', function () {
-        if (flag) {
-            flag = false;
-            if (num == 0) {
-                num = ul.children.length - 1;
-                ul.style.left = -num * focusWidth + 'px';
-            }
-            num--;
-    
-            animate(ul, -num * focusWidth, function () {
-                flag = true;
-            });
-            circle--;
-            circle = circle < 0 ? ol.children.length - 1 : circle;
-            circlechange();
-        }
-        
-    })
-    function circlechange() {
-        for (var i = 0; i < ol.children.length; i++){
-            ol.children[i].className = '';
-        }
-        ol.children[circle].className = 'current';
-    }
+const result = document.querySelector(".content");
+const list = document.querySelector(".list");
+const container = document.querySelector(".container");
+const body = document.querySelector("body");
 
-    var timer = setInterval(function () {
-        // 手动调用点击事件
-        arrow_r.click();
-    }, 2000);
-    
+window.addEventListener("load", function () {
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("GET", "https://api.oick.cn/lishi/api.php");
+
+    xhr.send();
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4) {
+            if (this.status >= 200 && this.status < 300) {
+                // console.log(JSON.parse(this.response).result);
+                dealData(JSON.parse(this.response).result);
+            }
+        }
+    }
+})
+
+// 处理数据
+function dealData(res) {
+    res.forEach(elm => {
+        const li = document.createElement("li");
+        const year = document.createElement("div");
+        const article = document.createElement("div");
+        year.className = "year";
+        article.className = "article";
+        year.innerHTML = elm.date.slice(0, 5);
+        article.innerHTML = elm.title;
+        li.appendChild(year);
+        li.appendChild(article);
+        result.appendChild(li);
+    });
+}
+
+list.addEventListener("touchstart", function () {
+
+
+})
+
+let is = true;
+list.addEventListener("touchend", function () {
+    if (is) {
+        this.innerHTML = "X";
+        container.style.top = "50px";
+        body.style.backgroundColor = "#ccc";
+    } else {
+        container.style.top = "-115px";
+        this.innerHTML = "<img src='imgs/list.png' alt=>";
+        body.style.backgroundColor = "#fff";
+    }
+    is = !is;
 })

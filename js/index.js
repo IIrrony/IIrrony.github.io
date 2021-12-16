@@ -2,6 +2,7 @@ const result = document.querySelector(".content");
 const list = document.querySelector(".list");
 const container = document.querySelector(".container");
 const body = document.querySelector("body");
+const day = document.querySelector(".riqi");
 
 window.addEventListener("load", function () {
     const xhr = new XMLHttpRequest();
@@ -14,7 +15,8 @@ window.addEventListener("load", function () {
         if (this.readyState === 4) {
             if (this.status >= 200 && this.status < 300) {
                 // console.log(JSON.parse(this.response).result);
-                dealData(JSON.parse(this.response).result);
+                console.log(JSON.parse(this.response).day);
+                dealData(JSON.parse(this.response));
             }
         }
     }
@@ -22,24 +24,22 @@ window.addEventListener("load", function () {
 
 // 处理数据
 function dealData(res) {
-    res.forEach(elm => {
+    console.log(res.day.split("/")[0]);
+    console.log(res.day.split("/")[1]);
+    day.innerHTML = res.day.split("/")[0]+'月'+ res.day.split("/")[1].trim() + '日';
+    res.result.forEach(elm => {
         const li = document.createElement("li");
         const year = document.createElement("div");
         const article = document.createElement("div");
         year.className = "year";
         article.className = "article";
-        year.innerHTML = elm.date.slice(0, 5);
+        year.innerHTML = elm.date.split("年")[0] + "年";
         article.innerHTML = elm.title;
         li.appendChild(year);
         li.appendChild(article);
         result.appendChild(li);
     });
 }
-
-list.addEventListener("touchstart", function () {
-
-
-})
 
 let is = true;
 list.addEventListener("touchend", function () {

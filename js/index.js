@@ -15,7 +15,6 @@ window.addEventListener("load", function () {
         if (this.readyState === 4) {
             if (this.status >= 200 && this.status < 300) {
                 // console.log(JSON.parse(this.response).result);
-                console.log(JSON.parse(this.response).day);
                 dealData(JSON.parse(this.response));
             }
         }

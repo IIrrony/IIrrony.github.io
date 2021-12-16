@@ -24,9 +24,7 @@ window.addEventListener("load", function () {
 
 // 处理数据
 function dealData(res) {
-    console.log(res.day.split("/")[0]);
-    console.log(res.day.split("/")[1]);
-    day.innerHTML = res.day.split("/")[0]+'月'+ res.day.split("/")[1].trim() + '日';
+    day.innerHTML = res.day.split("/")[0] + '月' + res.day.split("/")[1].trim() + '日';
     res.result.forEach(elm => {
         const li = document.createElement("li");
         const year = document.createElement("div");

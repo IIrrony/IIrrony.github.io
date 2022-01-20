@@ -1,48 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>历史上的今天</title>
-    <link rel="stylesheet" href="css/index.css">
+    <title>墨迹天气</title>
+    <link rel="shortcut icon" href="https://h5tq.moji.com/f5/assets/tianqi/favicon.ico">
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/echarts.js"></script>
 </head>
+
 <body>
-    <!-- 顶部 -->
-    <header>
-        <div class="title clearfix">
-            <ul>
-                <li>
-                    <img src="imgs/home.png" alt="">
-                </li>
-                <li>历史上的今天</li>
-                <li  class="list">
-                    <img src="imgs/list.png" alt="">
-                </li>
+    <div class="search_page">
+        <div class="head">
+            <div class="return"></div>
+            <input type="text" name="" id="" class="input" placeholder="请输入城市名">
+        </div>
+        <div class="history">
+            <div class="his_head">
+                <div class="his_tit">搜索记录</div>
+                <div class="his_dle"></div>
+            </div>
+            <ul class="his">
+                <li>重庆市</li>
+                
             </ul>
         </div>
-    </header>
-    <div class="container">
+        <div class="hot_city">
+            <div class="hot_head">
+                热搜城市
+            </div>
+            <ul>
+                <li>重庆市</li>
+                <li>北京市</li>
+                <li>广州市</li>
+                <li>上海市</li>
+                <li>深圳市</li>
+                <li>成都市</li>
+                <li>天津市</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="box_info">
+        <div class="header">
+            <div class="search_btn"></div>
+            <div class="city">重庆市江北区</div>
+        </div>
+        <div class="other">
+            <a href="https://html5.moji.com/tpd/gzbd/index.html">
+                <div class="yiqing">
+                    <img src="imgs/2.png" alt="">
+                    疫情资讯
+                </div>
+            </a>
+            <a href="https://html5.moji.com/tpd/safetravel/safetravel.html?t=1580984067263">
+                <div class="security">
+                    <img src="imgs/1.png" alt="">
+                    安全出行
+                </div>
+            </a>
+        </div>
+        <div class="info_wea">阴</div>
+        <div class="info_about">
+            <div class="number_info">
+                <em>13</em>
+            </div>
+            <p>西北风1级&nbsp;湿度87%</p>
+            <p>天冷了，该加衣服了！</p>
+            <div class="aqi_info">
+                <span><img src="imgs/air.png" alt=""></span>
+                <strong>95 良</strong>
+            </div>
+        </div>
+    </div>
+    <div class="days">
+        <div class="single left">
+            <div class="">
+                <em>今天</em>
+                <span class="warn_2">良</span>
+                <b>5 / 13°</b>
+            </div>
+            <div class="">
+                <strong>阴</strong>
+                <img src="imgs/w2.png" alt="">
+            </div>
+        </div>
+        <div class="single">
+            <div class="">
+                <em>明天</em>
+                <span class="warn_2">良</span>
+                <b>5 / 13°</b>
+            </div>
+            <div class="">
+                <strong>阴</strong>
+                <img src="imgs/w1.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="suns">
+        <div class="sunset">
+            <p>日落 18:20</p>
+        </div>
+        <div class="sunall">
+            <p>24小时</p>
+        </div>
+    </div>
+
+    <div class="week_wea">
+        <div class="wea_pic"></div>
         <ul>
-            <li>电话号码查询</li>
-            <li>电话号码查询</li>
-            <li>电话号码查询</li>
-            <li>电话号码查询</li>
+            <li>
+                <em>周三</em>
+                <dl class="wea">
+                    <dd>
+                        <strong>多云</strong>
+                    </dd>
+                    <dt>
+                        <img src="imgs/w1.png" alt="">
+                    </dt>
+                </dl>
+                <div></div>
+                <dl class="wea">
+                    <dt>
+                        <img src="imgs/w2.png" alt="">
+                    </dt>
+                    <dd>
+                        <strong>晴</strong>
+                    </dd>
+                </dl>
+                <p class="warn_2">良</p>
+                <dl class="wind">
+                    <dd>东北风</dd>
+                    <dd>1级</dd>
+                </dl>
+            </li>
+            <li>
+                <em>周三</em>
+                <dl class="wea">
+                    <dd>
+                        <strong>多云</strong>
+                    </dd>
+                    <dt>
+                        <img src="imgs/w1.png" alt="">
+                    </dt>
+                </dl>
+                <div></div>
+                <dl class="wea">
+                    <dt>
+                        <img src="imgs/w2.png" alt="">
+                    </dt>
+                    <dd>
+                        <strong>晴</strong>
+                    </dd>
+                </dl>
+                <p class="warn_2">良</p>
+                <dl class="wind">
+                    <dd>东北风</dd>
+                    <dd>1级</dd>
+                </dl>
+            </li>
+            <li>
+                <em>周三</em>
+                <dl class="wea">
+                    <dd>
+                        <strong>多云</strong>
+                    </dd>
+                    <dt>
+                        <img src="imgs/w1.png" alt="">
+                    </dt>
+                </dl>
+                <div></div>
+                <dl class="wea">
+                    <dt>
+                        <img src="imgs/w2.png" alt="">
+                    </dt>
+                    <dd>
+                        <strong>晴</strong>
+                    </dd>
+                </dl>
+                <p class="warn_2">良</p>
+                <dl class="wind">
+                    <dd>东北风</dd>
+                    <dd>1级</dd>
+                </dl>
+            </li>
+            <li>
+                <em>周三</em>
+                <dl class="wea">
+                    <dd>
+                        <strong>多云</strong>
+                    </dd>
+                    <dt>
+                        <img src="imgs/w1.png" alt="">
+                    </dt>
+                </dl>
+                <div></div>
+                <dl class="wea">
+                    <dt>
+                        <img src="imgs/w2.png" alt="">
+                    </dt>
+                    <dd>
+                        <strong>晴</strong>
+                    </dd>
+                </dl>
+                <p class="warn_2">良</p>
+                <dl class="wind">
+                    <dd>东北风</dd>
+                    <dd>1级</dd>
+                </dl>
+            </li>
+            <li>
+                <em>周三</em>
+                <dl class="wea">
+                    <dd>
+                        <strong>多云</strong>
+                    </dd>
+                    <dt>
+                        <img src="imgs/w1.png" alt="">
+                    </dt>
+                </dl>
+                <div></div>
+                <dl class="wea">
+                    <dt>
+                        <img src="imgs/w2.png" alt="">
+                    </dt>
+                    <dd>
+                        <strong>晴</strong>
+                    </dd>
+                </dl>
+                <p class="warn_2">良</p>
+                <dl class="wind">
+                    <dd>东北风</dd>
+                    <dd>1级</dd>
+                </dl>
+            </li>
+            <li>
+                <em>周三</em>
+                <dl class="wea">
+                    <dd>
+                        <strong>多云</strong>
+                    </dd>
+                    <dt>
+                        <img src="imgs/w1.png" alt="">
+                    </dt>
+                </dl>
+                <div></div>
+                <dl class="wea">
+                    <dt>
+                        <img src="imgs/w2.png" alt="">
+                    </dt>
+                    <dd>
+                        <strong>晴</strong>
+                    </dd>
+                </dl>
+                <p class="warn_2">良</p>
+                <dl class="wind">
+                    <dd>东北风</dd>
+                    <dd>1级</dd>
+                </dl>
+            </li>
         </ul>
     </div>
-    <div class="date">
-        <div class="point">
-            <div class="point-left"><</div>
-        </div>
-        <div class="riqi">12月12日</div>
-        <div class="point">
-            <div class="point-ringt">></div>
-        </div>
+
+    <div class="exponent">
+        <ul>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/28.png" alt="">
+                </span>
+                <em>钓鱼 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/28.png" alt="">
+                </span>
+                <em>钓鱼 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/28.png" alt="">
+                </span>
+                <em>钓鱼 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/28.png" alt="">
+                </span>
+                <em>钓鱼 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+        </ul>
     </div>
-    <div class="box">
-        <ul class="content"></ul>
-    </div>
-    <script src="js/index.js"></script>
+
 </body>
+
+<script src="js/index.js"></script>
+
 </html>

@@ -206,6 +206,7 @@ body {
     line-height: 28px;
     font-size: 13px;
     padding: 0px 10px;
+    border-top: 1px solid rgba(194, 194, 194, 0.2);
     background-color: rgb(13, 90, 165);
 }
 
@@ -235,7 +236,7 @@ body {
     border-radius: 15px;
     text-align: center;
     margin-top: 7px;
-    margin-left: 11px;
+    margin-left: 0.6875rem;
     line-height: 15px;
     background-color: rgb(215, 175, 14);
 }
@@ -249,6 +250,8 @@ body {
     float: right;
     width: 25px;
     height: 25px;
+    background-color: #fff;
+    border-radius: 20px;
 }
 
 .suns {
@@ -333,6 +336,8 @@ body {
     height: 100%;
     vertical-align: middle;
     display: inline-block;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1.25rem;
 }
 
 .wind {

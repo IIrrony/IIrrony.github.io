@@ -16,7 +16,7 @@
     <div class="search_page">
         <div class="head">
             <div class="return"></div>
-            <input type="text" name="" id="" class="input" placeholder="请输入城市名">
+            <input type="search" name="" id="" class="input" placeholder="请输入城市名">
         </div>
         <div class="history">
             <div class="his_head">
@@ -25,7 +25,7 @@
             </div>
             <ul class="his">
                 <li>重庆市</li>
-                
+
             </ul>
         </div>
         <div class="hot_city">
@@ -39,7 +39,7 @@
                 <li>上海市</li>
                 <li>深圳市</li>
                 <li>成都市</li>
-                <li>天津市</li>
+                <li>哈尔滨市</li>
             </ul>
         </div>
     </div>
@@ -66,13 +66,13 @@
         <div class="info_wea">阴</div>
         <div class="info_about">
             <div class="number_info">
-                <em>13</em>
+                <em class="now_wea">13</em>
             </div>
-            <p>西北风1级&nbsp;湿度87%</p>
+            <p class="info_wind"></p>
             <p>天冷了，该加衣服了！</p>
             <div class="aqi_info">
-                <span><img src="imgs/air.png" alt=""></span>
-                <strong>95 良</strong>
+                <span class="air_bgc"><img src="imgs/air.png" alt=""></span>
+                <strong class="air_now"></strong>
             </div>
         </div>
     </div>
@@ -80,30 +80,30 @@
         <div class="single left">
             <div class="">
                 <em>今天</em>
-                <span class="warn_2">良</span>
-                <b>5 / 13°</b>
+                <span class="warn_2"></span>
+                <b class="today_du"></b>
             </div>
             <div class="">
-                <strong>阴</strong>
-                <img src="imgs/w2.png" alt="">
+                <strong class="today"></strong>
+                <img class="left_img" src="icons/104.svg" alt="">
             </div>
         </div>
         <div class="single">
             <div class="">
                 <em>明天</em>
                 <span class="warn_2">良</span>
-                <b>5 / 13°</b>
+                <b class="tom_du"></b>
             </div>
             <div class="">
-                <strong>阴</strong>
-                <img src="imgs/w1.png" alt="">
+                <strong class="tom"></strong>
+                <img class="right_img" src="icons/104.svg" alt="">
             </div>
         </div>
     </div>
 
     <div class="suns">
         <div class="sunset">
-            <p>日落 18:20</p>
+            <p class="riluo"></p>
         </div>
         <div class="sunall">
             <p>24小时</p>
@@ -112,157 +112,7 @@
 
     <div class="week_wea">
         <div class="wea_pic"></div>
-        <ul>
-            <li>
-                <em>周三</em>
-                <dl class="wea">
-                    <dd>
-                        <strong>多云</strong>
-                    </dd>
-                    <dt>
-                        <img src="imgs/w1.png" alt="">
-                    </dt>
-                </dl>
-                <div></div>
-                <dl class="wea">
-                    <dt>
-                        <img src="imgs/w2.png" alt="">
-                    </dt>
-                    <dd>
-                        <strong>晴</strong>
-                    </dd>
-                </dl>
-                <p class="warn_2">良</p>
-                <dl class="wind">
-                    <dd>东北风</dd>
-                    <dd>1级</dd>
-                </dl>
-            </li>
-            <li>
-                <em>周三</em>
-                <dl class="wea">
-                    <dd>
-                        <strong>多云</strong>
-                    </dd>
-                    <dt>
-                        <img src="imgs/w1.png" alt="">
-                    </dt>
-                </dl>
-                <div></div>
-                <dl class="wea">
-                    <dt>
-                        <img src="imgs/w2.png" alt="">
-                    </dt>
-                    <dd>
-                        <strong>晴</strong>
-                    </dd>
-                </dl>
-                <p class="warn_2">良</p>
-                <dl class="wind">
-                    <dd>东北风</dd>
-                    <dd>1级</dd>
-                </dl>
-            </li>
-            <li>
-                <em>周三</em>
-                <dl class="wea">
-                    <dd>
-                        <strong>多云</strong>
-                    </dd>
-                    <dt>
-                        <img src="imgs/w1.png" alt="">
-                    </dt>
-                </dl>
-                <div></div>
-                <dl class="wea">
-                    <dt>
-                        <img src="imgs/w2.png" alt="">
-                    </dt>
-                    <dd>
-                        <strong>晴</strong>
-                    </dd>
-                </dl>
-                <p class="warn_2">良</p>
-                <dl class="wind">
-                    <dd>东北风</dd>
-                    <dd>1级</dd>
-                </dl>
-            </li>
-            <li>
-                <em>周三</em>
-                <dl class="wea">
-                    <dd>
-                        <strong>多云</strong>
-                    </dd>
-                    <dt>
-                        <img src="imgs/w1.png" alt="">
-                    </dt>
-                </dl>
-                <div></div>
-                <dl class="wea">
-                    <dt>
-                        <img src="imgs/w2.png" alt="">
-                    </dt>
-                    <dd>
-                        <strong>晴</strong>
-                    </dd>
-                </dl>
-                <p class="warn_2">良</p>
-                <dl class="wind">
-                    <dd>东北风</dd>
-                    <dd>1级</dd>
-                </dl>
-            </li>
-            <li>
-                <em>周三</em>
-                <dl class="wea">
-                    <dd>
-                        <strong>多云</strong>
-                    </dd>
-                    <dt>
-                        <img src="imgs/w1.png" alt="">
-                    </dt>
-                </dl>
-                <div></div>
-                <dl class="wea">
-                    <dt>
-                        <img src="imgs/w2.png" alt="">
-                    </dt>
-                    <dd>
-                        <strong>晴</strong>
-                    </dd>
-                </dl>
-                <p class="warn_2">良</p>
-                <dl class="wind">
-                    <dd>东北风</dd>
-                    <dd>1级</dd>
-                </dl>
-            </li>
-            <li>
-                <em>周三</em>
-                <dl class="wea">
-                    <dd>
-                        <strong>多云</strong>
-                    </dd>
-                    <dt>
-                        <img src="imgs/w1.png" alt="">
-                    </dt>
-                </dl>
-                <div></div>
-                <dl class="wea">
-                    <dt>
-                        <img src="imgs/w2.png" alt="">
-                    </dt>
-                    <dd>
-                        <strong>晴</strong>
-                    </dd>
-                </dl>
-                <p class="warn_2">良</p>
-                <dl class="wind">
-                    <dd>东北风</dd>
-                    <dd>1级</dd>
-                </dl>
-            </li>
+        <ul class="day_wea">
         </ul>
     </div>
 

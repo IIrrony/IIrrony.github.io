@@ -22,6 +22,8 @@ const hot_city = Getelm(".hot_city");
 const success_search = Getelm(".success_search");
 const his = Getelm(".his");
 const lis = hot_city.querySelectorAll("li");
+const dle = Getelm(".his_dle");
+let flag = false;
 
 
 function Dealhotcity(lis) {
@@ -37,10 +39,18 @@ function Dealhotcity(lis) {
 
 
 function CityWea(res) {
-    const location = res.location[0].id;
-    ajax.get('https://devapi.qweather.com/v7/weather/7d?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + location, data, DealDays);
-    ajax.get('https://devapi.qweather.com/v7/air/now?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + location, data, DealNowAir);
-    ajax.get('https://devapi.qweather.com/v7/weather/now?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + location, data, DealNowWea);
+    if (res.code === "200") {
+        city.innerHTML = res.location[0].name + "市";
+        const location = res.location[0].id;
+        ajax.get('https://devapi.qweather.com/v7/weather/7d?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + location, data, DealDays);
+        ajax.get('https://devapi.qweather.com/v7/air/now?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + location, data, DealNowAir);
+        ajax.get('https://devapi.qweather.com/v7/weather/now?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + location, data, DealNowWea);
+        flag = true;
+    } else {
+        alert("请输入正确的地名哦！！😎");
+        input.value = "";
+        flag = false;
+    }
 }
 
 
@@ -78,16 +88,18 @@ function Paint(obj, dataday, datanight) {
     const option = {
         xAxis: {
             data: [],
-            show: false
+            show: false,
         },
         yAxis: {
-            show: false
+            show: false,
+            min: 'dateMin',
+            max: 'dateMax',
         },
         grid: {
             left: '0%',
             right: '0%',
             top: '10%',
-            bottom: '-10%'
+            bottom: '20%'
         },
         series: [{
                 data: dataday,
@@ -152,7 +164,7 @@ function Ajax() {
                 if (this.status >= 200 && this.status < 300) {
                     data.success(JSON.parse(this.response), fun);
                 } else {
-                    data.error();
+                    data.error(JSON.parse(this.response));
                 }
             }
         }
@@ -320,7 +332,7 @@ let data = {
     },
 }
 
-ajax.get('https://geoapi.qweather.com/v2/city/lookup?&key=75b241a3acb942a7bf10b9b42ef8e046&location=重庆市', data, fun1);
+ajax.get('https://geoapi.qweather.com/v2/city/lookup?&key=75b241a3acb942a7bf10b9b42ef8e046&location=重庆', data, fun1);
 
 ajax.get('https://devapi.qweather.com/v7/weather/7d?&key=75b241a3acb942a7bf10b9b42ef8e046&location=101040100', data, DealDays);
 ajax.get('https://devapi.qweather.com/v7/air/now?&key=75b241a3acb942a7bf10b9b42ef8e046&location=101040100', data, DealNowAir);
@@ -330,27 +342,33 @@ ajax.get('https://devapi.qweather.com/v7/weather/now?&key=75b241a3acb942a7bf10b9
 
 addEventListener(success_search, "click", function () {
     if (input.value.trim() === '') {
-        alert("Please input something!!!!!!!");
+        alert("请输入内容哦!!!!!😛");
     } else {
         const search_city = input.value;
-        let li = create("li");
-        li.innerHTML = search_city + "市";
-        addEventListener(li, "click", function () {
-            city.innerHTML = li.innerHTML;
-            search_page.style.display = "none";
-            ajax.get('https://geoapi.qweather.com/v2/city/lookup?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + li.innerHTML, data, CityWea);
-        });
-        his.appendChild(li);
-        city.innerHTML = search_city + "市";
-        search_page.style.display = "none";
         ajax.get('https://geoapi.qweather.com/v2/city/lookup?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + search_city, data, CityWea);
+        if (flag) {
+            let li = create("li");
+            li.innerHTML = search_city + "市";
+            addEventListener(li, "click", function () {
+                city.innerHTML = li.innerHTML;
+                search_page.style.display = "none";
+                ajax.get('https://geoapi.qweather.com/v2/city/lookup?&key=75b241a3acb942a7bf10b9b42ef8e046&location=' + li.innerHTML, data, CityWea);
+            });
+            his.appendChild(li);
+            search_page.style.display = "none";
+        }
     }
-
     input.value = "";
 })
+
 
 $(".input").keypress(function (e) {
     if (e.keyCode === 13) {
         $(".success_search").click();
     }
 });
+
+// 历史记录删除
+addEventListener(dle, "click", function () {
+    his.innerHTML = "";
+})

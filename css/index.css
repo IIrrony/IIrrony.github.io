@@ -162,7 +162,6 @@ body {
     bottom: 10px;
     right: 20px;
     background-color: rgb(0, 0, 0, .1);
-    width: 80px;
     height: 35px;
     line-height: 35px;
     border-radius: 35px;
@@ -231,7 +230,7 @@ body {
 }
 
 .warn_2 {
-    width: 35px;
+    width: 60%;
     height: 15px;
     border-radius: 15px;
     text-align: center;
@@ -243,7 +242,8 @@ body {
 
 .single span {
     float: left;
-    margin-left: 7px;
+    margin-left: 0.4375rem;
+    width: 25%;
 }
 
 .single img {
@@ -408,7 +408,7 @@ body {
 
 .head input {
     margin-top: 10px;
-    width: 290px;
+    width: 86%;
     height: 40px;
     border: 1px solid rgb(235, 235, 235);
     border-radius: 5px;
@@ -433,6 +433,15 @@ body {
     color: rgb(172, 172, 172);
     font-size: 13px;
     margin-left: 10px;
+}
+
+.his_dle {
+    width: 40%;
+    float: right;
+    text-align: right;
+    color: rgb(172, 172, 172);
+    font-size: 13px;
+    margin-right: 10px;
 }
 
 .hot_city {

@@ -384,7 +384,19 @@ body {
     overflow-y: scroll;
     background: #f1f0f6;
 }
+.search_page .head {
+    position: relative;
+}
 
+.head img {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    background-color: #666;
+    width: 37px;
+    height: 37px;
+    border-radius: 5px;
+}
 .head .return {
     float: left;
     width: 12px;

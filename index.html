@@ -21,6 +21,17 @@
         -o-animation: anim 1.5s ease-in-out infinite;
         -moz-animation: anim 1.5s ease-in-out infinite;
       }
+      span{
+        display: block;
+      }
+      img{
+        width: 100px;
+        height: auto;
+        margin: 0 auto;
+      }
+      div{
+        text-align: center;
+      }
       #name {
         position: absolute;
         top: 50%;
@@ -28,6 +39,7 @@
         transform: translate(-50%, -50%);
         margin-top: -20px;
         font-size: 46px;
+        font-style: italic;
         color: #ea80b0;
       }
       @keyframes anim {
@@ -103,7 +115,11 @@
   <body>
     <canvas id="pinkboard"></canvas>
     <!-- 在下面加名字 -->
-     <div id="name" style="color: #ea80b0;">wyh💗xxx</div> 
+     <div id="name" style="color: #ea80b0;">
+
+      <span>Lizh</span>
+      <img src="1.jpg" alt="" srcset="">
+    </div> 
  
     <script>
       var settings = {

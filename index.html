@@ -1,353 +1,251 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>💗</title>
- 
-    <style>
-      html,
-      body {
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        background: #fff;
-      }
-      canvas {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        animation: anim 1.5s ease-in-out infinite;
-        -webkit-animation: anim 1.5s ease-in-out infinite;
-        -o-animation: anim 1.5s ease-in-out infinite;
-        -moz-animation: anim 1.5s ease-in-out infinite;
-      }
-      span{
-        display: block;
-      }
-      img{
-        width: 100px;
-        height: auto;
-        margin: 0 auto;
-      }
-      div{
-        text-align: center;
-      }
-      #name {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        margin-top: -20px;
-        font-size: 46px;
-        font-style: italic;
-        color: #ea80b0;
-      }
-      @keyframes anim {
-        0% {
-          transform: scale(0.8);
-        }
-        25% {
-          transform: scale(0.7);
-        }
-        50% {
-          transform: scale(1);
-        }
-        75% {
-          transform: scale(0.7);
-        }
-        100% {
-          transform: scale(0.8);
-        }
-      }
-      @-webkit-keyframes anim {
-        0% {
-          -webkit-transform: scale(0.8);
-        }
-        25% {
-          -webkit-transform: scale(0.7);
-        }
-        50% {
-          -webkit-transform: scale(1);
-        }
-        75% {
-          -webkit-transform: scale(0.7);
-        }
-        100% {
-          -webkit-transform: scale(0.8);
-        }
-      }
-      @-o-keyframes anim {
-        0% {
-          -o-transform: scale(0.8);
-        }
-        25% {
-          -o-transform: scale(0.7);
-        }
-        50% {
-          -o-transform: scale(1);
-        }
-        75% {
-          -o-transform: scale(0.7);
-        }
-        100% {
-          -o-transform: scale(0.8);
-        }
-      }
-      @-moz-keyframes anim {
-        0% {
-          -moz-transform: scale(0.8);
-        }
-        25% {
-          -moz-transform: scale(0.7);
-        }
-        50% {
-          -moz-transform: scale(1);
-        }
-        75% {
-          -moz-transform: scale(0.7);
-        }
-        100% {
-          -moz-transform: scale(0.8);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="pinkboard"></canvas>
-    <!-- 在下面加名字 -->
-     <div id="name" style="color: #ea80b0;">
+<html lang="en">
 
-      <span>Lizh</span>
-      <img src="1.jpg" alt="" srcset="">
-    </div> 
- 
-    <script>
-      var settings = {
-        particles: {
-          length: 500, 
-          duration: 2, 
-          velocity: 100, 
-          effect: -0.75,
-          size: 30, 
-        },
-      };
-      (function () {
-        var b = 0;
-        var c = ["ms", "moz", "webkit", "o"];
-        for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) {
-          window.requestAnimationFrame = window[c[a] + "RequestAnimationFrame"];
-          window.cancelAnimationFrame =
-            window[c[a] + "CancelAnimationFrame"] ||
-            window[c[a] + "CancelRequestAnimationFrame"];
-        }
-        if (!window.requestAnimationFrame) {
-          window.requestAnimationFrame = function (h, e) {
-            var d = new Date().getTime();
-            var f = Math.max(0, 16 - (d - b));
-            var g = window.setTimeout(function () {
-              h(d + f);
-            }, f);
-            b = d + f;
-            return g;
-          };
-        }
-        if (!window.cancelAnimationFrame) {
-          window.cancelAnimationFrame = function (d) {
-            clearTimeout(d);
-          };
-        }
-      })();
-      var Point = (function () {
-        function Point(x, y) {
-          this.x = typeof x !== "undefined" ? x : 0;
-          this.y = typeof y !== "undefined" ? y : 0;
-        }
-        Point.prototype.clone = function () {
-          return new Point(this.x, this.y);
-        };
-        Point.prototype.length = function (length) {
-          if (typeof length == "undefined")
-            return Math.sqrt(this.x * this.x + this.y * this.y);
-          this.normalize();
-          this.x *= length;
-          this.y *= length;
-          return this;
-        };
-        Point.prototype.normalize = function () {
-          var length = this.length();
-          this.x /= length;
-          this.y /= length;
-          return this;
-        };
-        return Point;
-      })();
-      var Particle = (function () {
-        function Particle() {
-          this.position = new Point();
-          this.velocity = new Point();
-          this.acceleration = new Point();
-          this.age = 0;
-        }
-        Particle.prototype.initialize = function (x, y, dx, dy) {
-          this.position.x = x;
-          this.position.y = y;
-          this.velocity.x = dx;
-          this.velocity.y = dy;
-          this.acceleration.x = dx * settings.particles.effect;
-          this.acceleration.y = dy * settings.particles.effect;
-          this.age = 0;
-        };
-        Particle.prototype.update = function (deltaTime) {
-          this.position.x += this.velocity.x * deltaTime;
-          this.position.y += this.velocity.y * deltaTime;
-          this.velocity.x += this.acceleration.x * deltaTime;
-          this.velocity.y += this.acceleration.y * deltaTime;
-          this.age += deltaTime;
-        };
-        Particle.prototype.draw = function (context, image) {
-          function ease(t) {
-            return --t * t * t + 1;
-          }
-          var size = image.width * ease(this.age / settings.particles.duration);
-          context.globalAlpha = 1 - this.age / settings.particles.duration;
-          context.drawImage(
-            image,
-            this.position.x - size / 2,
-            this.position.y - size / 2,
-            size,
-            size
-          );
-        };
-        return Particle;
-      })();
-      var ParticlePool = (function () {
-        var particles,
-          firstActive = 0,
-          firstFree = 0,
-          duration = settings.particles.duration;
- 
-        function ParticlePool(length) {
-          particles = new Array(length);
-          for (var i = 0; i < particles.length; i++)
-            particles[i] = new Particle();
-        }
-        ParticlePool.prototype.add = function (x, y, dx, dy) {
-          particles[firstFree].initialize(x, y, dx, dy);
-          firstFree++;
-          if (firstFree == particles.length) firstFree = 0;
-          if (firstActive == firstFree) firstActive++;
-          if (firstActive == particles.length) firstActive = 0;
-        };
-        ParticlePool.prototype.update = function (deltaTime) {
-          var i;
-          if (firstActive < firstFree) {
-            for (i = firstActive; i < firstFree; i++)
-              particles[i].update(deltaTime);
-          }
-          if (firstFree < firstActive) {
-            for (i = firstActive; i < particles.length; i++)
-              particles[i].update(deltaTime);
-            for (i = 0; i < firstFree; i++) particles[i].update(deltaTime);
-          }
-          while (
-            particles[firstActive].age >= duration &&
-            firstActive != firstFree
-          ) {
-            firstActive++;
-            if (firstActive == particles.length) firstActive = 0;
-          }
-        };
-        ParticlePool.prototype.draw = function (context, image) {
-          if (firstActive < firstFree) {
-            for (i = firstActive; i < firstFree; i++)
-              particles[i].draw(context, image);
-          }
-          if (firstFree < firstActive) {
-            for (i = firstActive; i < particles.length; i++)
-              particles[i].draw(context, image);
-            for (i = 0; i < firstFree; i++) particles[i].draw(context, image);
-          }
-        };
-        return ParticlePool;
-      })();
-      (function (canvas) {
-        var context = canvas.getContext("2d"),
-          particles = new ParticlePool(settings.particles.length),
-          particleRate =
-            settings.particles.length / settings.particles.duration, 
-          time;
-        function pointOnHeart(t) {
-          return new Point(
-            160 * Math.pow(Math.sin(t), 3),
-            130 * Math.cos(t) -
-              50 * Math.cos(2 * t) -
-              20 * Math.cos(3 * t) -
-              10 * Math.cos(4 * t) +
-              25
-          );
-        }
-        var image = (function () {
-          var canvas = document.createElement("canvas"),
-            context = canvas.getContext("2d");
-          canvas.width = settings.particles.size;
-          canvas.height = settings.particles.size;
-          function to(t) {
-            var point = pointOnHeart(t);
-            point.x =
-              settings.particles.size / 2 +
-              (point.x * settings.particles.size) / 350;
-            point.y =
-              settings.particles.size / 2 -
-              (point.y * settings.particles.size) / 350;
-            return point;
-          }
-          context.beginPath();
-          var t = -Math.PI;
-          var point = to(t);
-          context.moveTo(point.x, point.y);
-          while (t < Math.PI) {
-            t += 0.01;
-            point = to(t);
-            context.lineTo(point.x, point.y);
-          }
-          context.closePath();
-          context.fillStyle = "#ea80b0";
-          context.fill();
-          var image = new Image();
-          image.src = canvas.toDataURL();
-          return image;
-        })();
-        function render() {
-          requestAnimationFrame(render);
-          var newTime = new Date().getTime() / 1000,
-            deltaTime = newTime - (time || newTime);
-          time = newTime;
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          var amount = particleRate * deltaTime;
-          for (var i = 0; i < amount; i++) {
-            var pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random());
-            var dir = pos.clone().length(settings.particles.velocity);
-            particles.add(
-              canvas.width / 2 + pos.x,
-              canvas.height / 2 - pos.y,
-              dir.x,
-              -dir.y
-            );
-          }
-          particles.update(deltaTime);
-          particles.draw(context, image);
-        }
-        function onResize() {
-          canvas.width = canvas.clientWidth;
-          canvas.height = canvas.clientHeight;
-        }
-        window.onresize = onResize;
-        setTimeout(function () {
-          onResize();
-          render();
-        }, 10);
-      })(document.getElementById("pinkboard"));
- 
-    </script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墨迹天气</title>
+    <link rel="shortcut icon" href="https://h5tq.moji.com/f5/assets/tianqi/favicon.ico">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/echarts.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+</head>
+
+<body>
+    <div class="search_page">
+        <div class="head">
+            <div class="return"></div>
+            <input type="search" name="" id="" class="input" placeholder="请输入城市名">
+            <img class="success_search" src="imgs/search.png" alt="">
+        </div>
+        <div class="history">
+            <div class="his_head">
+                <div class="his_tit">搜索记录</div>
+                <div class="his_dle">删除</div>
+            </div>
+            <ul class="his">
+
+            </ul>
+        </div>
+        <div class="hot_city">
+            <div class="hot_head">
+                热搜城市
+            </div>
+            <ul>
+                <li>重庆市</li>
+                <li>北京市</li>
+                <li>广州市</li>
+                <li>上海市</li>
+                <li>深圳市</li>
+                <li>成都市</li>
+                <li>哈尔滨市</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="box_info">
+        <div class="header">
+            <div class="search_btn"></div>
+            <div class="city">重庆市江北区</div>
+        </div>
+        <div class="other">
+            <a href="https://html5.moji.com/tpd/gzbd/index.html">
+                <div class="yiqing">
+                    <img src="imgs/2.png" alt="">
+                    疫情资讯
+                </div>
+            </a>
+            <a href="https://html5.moji.com/tpd/safetravel/safetravel.html?t=1580984067263">
+                <div class="security">
+                    <img src="imgs/1.png" alt="">
+                    安全出行
+                </div>
+            </a>
+        </div>
+        <div class="info_wea">阴</div>
+        <div class="info_about">
+            <div class="number_info">
+                <em class="now_wea">13</em>
+            </div>
+            <p class="info_wind"></p>
+            <p>天冷了，该加衣服了！</p>
+            <div class="aqi_info">
+                <span class="air_bgc"><img src="imgs/air.png" alt=""></span>
+                <strong class="air_now"></strong>
+            </div>
+        </div>
+    </div>
+    <div class="days">
+        <div class="single left">
+            <div class="">
+                <em>今天</em>
+                <span class="warn_2"></span>
+                <b class="today_du"></b>
+            </div>
+            <div class="">
+                <strong class="today"></strong>
+                <img class="left_img" src="icons/104.svg" alt="">
+            </div>
+        </div>
+        <div class="single">
+            <div class="">
+                <em>明天</em>
+                <span class="warn_2">良</span>
+                <b class="tom_du"></b>
+            </div>
+            <div class="">
+                <strong class="tom"></strong>
+                <img class="right_img" src="icons/104.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="suns">
+        <div class="sunset">
+            <p class="riluo"></p>
+        </div>
+        <div class="sunall">
+            <p>24小时</p>
+        </div>
+    </div>
+
+    <div class="week_wea">
+        <div class="wea_pic"></div>
+        <ul class="day_wea">
+            
+        </ul>
+    </div>
+
+    <div class="exponent">
+        <ul>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/28.png" alt="">
+                </span>
+                <em>钓鱼 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/28.png" alt="">
+                </span>
+                <em>钓鱼 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/28.png" alt="">
+                </span>
+                <em>钓鱼 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/28.png" alt="">
+                </span>
+                <em>钓鱼 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/default.png" alt="">
+                </span>
+                <em>约会 较适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+            <li>
+                <span>
+                    <img src="imgs/26.png" alt="">
+                </span>
+                <em>运动 不适宜</em>
+            </li>
+        </ul>
+    </div>
+
+</body>
+
+<script src="js/funs.js"></script>
+<script src="js/index.js"></script>
+
 </html>
